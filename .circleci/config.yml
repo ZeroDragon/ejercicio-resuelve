@@ -1,0 +1,28 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/app
+  docker:
+    - image: node:9
+
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-deps-{{ checksum "yarn.lock" }}
+      - run: yarn add codecov
+      - run: yarn install
+      - save_cache:
+          key: npm-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run: yarn test && npx codecov
+
+workflows:
+  version: 2
+  build_test_codecov:
+    jobs:
+      - build
