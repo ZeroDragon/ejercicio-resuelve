@@ -1,6 +1,6 @@
 # EXAMEN PARA CANDIDATOS
 
-![CircleCi](http://magmalada.io/CircleCi/github/ZeroDragon/ejercicio-resuelve.svg "CircleCi") ![CodeCov](http://magmalada.io/CodeCov/github/ZeroDragon/ejercicio-resuelve.svg "CodeCov")
+[![CircleCi](http://magmalada.io/CircleCi/github/ZeroDragon/ejercicio-resuelve.svg "CircleCi")](https://circleci.com/gh/ZeroDragon/ejercicio-resuelve) [![CodeCov](http://magmalada.io/CodeCov/github/ZeroDragon/ejercicio-resuelve.svg "CodeCov")](https://codecov.io/gh/ZeroDragon/ejercicio-resuelve)
 
 ## Como levantar el servidor
 
