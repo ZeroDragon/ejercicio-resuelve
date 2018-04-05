@@ -1,9 +1,13 @@
 version: 2
 
 defaults: &defaults
-  working_directory: ~/app
   docker:
     - image: node:9
+      environment:
+        TZ: "/usr/share/zoneinfo/America/Mexico_City"
+  working_directory: ~/app
+  environment:
+    TZ: "/usr/share/zoneinfo/America/Mexico_City"
 
 jobs:
   build:
