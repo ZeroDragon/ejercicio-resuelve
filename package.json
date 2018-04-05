@@ -7,7 +7,7 @@
     "test": "npx jest --runInBand --forceExit",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "precommit": "lint-staged"
+    "precommit": "yarn test && lint-staged"
   },
   "author": "",
   "license": "ISC",
