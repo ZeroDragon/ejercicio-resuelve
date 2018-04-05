@@ -13,7 +13,7 @@ export const dateToString = date => {
   return `${date.getFullYear()}-${addZ(date.getMonth() + 1)}-${addZ(date.getDate())}`
 }
 export const daysBetween = (init, end) => {
-  return (end.getTime() - init.getTime()) / msInDay + 1
+  return Math.ceil((end.getTime() - init.getTime()) / msInDay) + 1
 }
 
 /**
@@ -89,8 +89,8 @@ export const worker = async (resource, id, start, finish) => {
   }, 10)
   que.push({start, finish})
   const retval = await new Promise(resolve => {
-    que.drain = () => {
-      if (que.running() + que.length() === 0) {
+    que.drain = function () {
+      if (this.running() + this.length() === 0) {
         resolve({results, numberOfCalls})
       }
     }
