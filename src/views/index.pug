@@ -1,0 +1,95 @@
+doctype html
+html
+  head
+    title Ejercicio
+    script(src="https://unpkg.com/jquery@3.2.1/dist/jquery.min.js")
+    script(src="https://unpkg.com/moment@2.18.1/min/moment.min.js")
+    link(href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet")
+    script(src="https://unpkg.com/eonasdan-bootstrap-datetimepicker@4.17.47/build/js/bootstrap-datetimepicker.min.js")
+    link(href="https://unpkg.com/eonasdan-bootstrap-datetimepicker@4.17.47/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet")
+    script(src="https://unpkg.com/vue@2.5/dist/vue.min.js")
+    script(src="https://unpkg.com/vue-bootstrap-datetimepicker")
+
+    style.
+      @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+      body {
+        font-family: 'Roboto', sans-serif;
+        margin:0;
+      }
+
+  body
+    #app.container
+      .row: .col-xs-12
+        h1 Buscar facturas:
+      .row
+        .col-xs-4
+          label ID de cuenta
+          input(type="text" class="form-control", v-model="id")
+        .col-xs-4
+          label Fecha inicio
+          .dateHolder: date-picker(name="date" v-model="start" :config="config")
+        .col-xs-4
+          label Fecha fin
+          .dateHolder: date-picker(name="date" v-model="finish" :config="config")
+      .row: .col-xs-12 &nbsp;
+      .row
+        .col-xs-2.col-xs-offset-10.text-right
+          button.btn.btn-primary(type="button", v-on:click="getInvoices") Buscar
+      .row: .col-xs-12 &nbsp;
+      .row(v-if="results.details")
+        .col-xs-3
+          label Total del facturas: 
+          |  {{results.total}}
+        .col-xs-3
+          label Numero de llamadas: 
+          |  {{results.numberOfCalls}}
+        .col-xs-3
+          label Tiempo de ejecucuón: 
+          |  {{results.elapsedMs}} milisegundos
+        .col-xs-3.text-right
+          button.btn.btn-primary(type="button", v-on:click="showDettails = !showDettails")
+            |Ver/Ocultar Detalles
+      div(v-if="showDettails")
+        table.table.table-striped
+          tr
+            th Desde
+            th Hasta
+            th Resultado
+          tr(v-for="detail in results.details")
+            td {{detail.start | humanDate}}
+            td {{detail.finish | humanDate}}
+            td {{detail.result}}
+
+    script.
+      var addZ = (i) => `00${i}`.slice(-2)
+      Vue.component('date-picker', VueBootstrapDatetimePicker.default);
+
+      new Vue({
+        el: '#app',
+        data: {
+          start: '2017-01-01',
+          finish: '2017-03-30',
+          id: '4e25ce61-e6e2-457a-89f7-116404990967',
+          results: {},
+          showDettails: false,
+          config: {
+            format: 'YYYY-MM-DD',
+            useCurrent: false,
+            showClear: true,
+            showClose: true,
+          }
+        },
+        methods: {
+          getInvoices () {
+            $.get(`/invoices/${this.id}/${this.start}/${this.finish}`, (data) => {
+              this.results = data
+            })
+          }
+        },
+        filters: {
+          humanDate (date) {
+            const d = new Date(date)
+            return `${d.getFullYear()}-${window.addZ(d.getMonth() + 1)}-${window.addZ(d.getDate())}`
+          }
+        }
+      });
