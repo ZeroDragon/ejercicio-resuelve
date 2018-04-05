@@ -1,5 +1,7 @@
 # EXAMEN PARA CANDIDATOS
 
+![CircleCi](http://magmalada.io/CircleCi/github/ZeroDragon/ejercicio-resuelve.svg "CircleCi") ![CodeCov](http://magmalada.io/CodeCov/github/ZeroDragon/ejercicio-resuelve.svg "CodeCov")
+
 ## Como levantar el servidor
 
 - Copiar el archivo `env.example` a `.env`
