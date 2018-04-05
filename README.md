@@ -7,11 +7,11 @@ EXAMEN PARA CANDIDATOS
 
 ## Requerimientos
 
-Una de las funciones más importantes de la plataforma Enconta, es que se des- carguen las facturas emitidas a y por nuestros clientes. Esto lo hacemos con un servicio que hace crawling de la página de hacienda y descarga por periodos de tiempo las facturas.  
+Una de las funciones más importantes de la plataforma Enconta, es que se descarguen las facturas emitidas a y por nuestros clientes. Esto lo hacemos con un servicio que hace crawling de la página de hacienda y descarga por periodos de tiempo las facturas.  
 
 El problema con el que nos encontramos es que cuando le pides las facturas entre dos fechas, si hay más de 500 resultados, te da un error que sólo dice “hay más de 500 resultados”. Esto hace muy complicado sacar una cuenta real de cuántas facturas tiene nuestro cliente en un periodo determinado.  
 
-Tú debes resolver el mismo problema. Tienes que conectarte a un pequeño ser- vicio web y decirme cuántas facturas hay en el 2017 para un cierto id.  
+Tú debes resolver el mismo problema. Tienes que conectarte a un pequeño servicio web y decirme cuántas facturas hay en el 2017 para un cierto id.  
 
 Los parámetros de conexión son:
 
